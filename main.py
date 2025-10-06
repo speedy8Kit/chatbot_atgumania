@@ -1,13 +1,32 @@
+import os
 import datetime
 import schedule
 import time
 from telegram import Bot
+from dotenv import load_dotenv
 
-# Вставь сюда токен, полученный от BotFather
-BOT_TOKEN = 'твой_токен_сюда'
+# Загружаем переменные окружения из .env файла
+load_dotenv()
 
-# Вставь сюда ID группового чата (можно получить отправив сообщение и получив ID с помощью бота @chatid_echo_bot)
-CHAT_ID = -1001234567890  # пример ID группы (начинается с -100)
+# Получаем значения из переменных окружения
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+CHAT_ID = os.getenv('CHAT_ID')
+DAILY_TIME = os.getenv('DAILY_TIME', '09:00')  # Значение по умолчанию
+MAX_PUSHUPS = int(os.getenv('MAX_PUSHUPS', '100'))  # Значение по умолчанию
+
+
+# Проверяем, что обязательные переменные установлены
+if not BOT_TOKEN:
+    raise ValueError("❌ BOT_TOKEN не установлен. Проверьте файл .env")
+if not CHAT_ID:
+    raise ValueError("❌ CHAT_ID не установлен. Проверьте файл .env")
+
+# Преобразуем CHAT_ID в int (если это числовой ID) или оставляем как строку (если username)
+try:
+    CHAT_ID = int(CHAT_ID)
+except ValueError:
+    pass  # Оставляем как строку (для username)
+
 
 bot = Bot(token=BOT_TOKEN)
 

@@ -11,15 +11,26 @@
 - Напоминания: Каждый день в 9:00 утра
 
 
-# Создайте папку проекта
-mkdir pushup-bot
-cd pushup-bot
+# 1. Клонируйте/создайте проект
+git clone <your-repo>
+cd chatbot_atgumania
 
-# Создайте виртуальное окружение
+# 2. Создайте виртуальное окружение
 python -m venv bot_env
 
-# Активируйте окружение
-# Для Windows:
-bot_env\Scripts\activate
-# Для macOS/Linux:
-source bot_env/bin/activate
+# 3. Активируйте окружение
+source bot_env/bin/activate  # Linux/Mac
+# или
+bot_env\Scripts\activate    # Windows
+
+# 4. Установите зависимости
+pip install -r requirements.txt
+
+# 5. Создайте файл .env и заполните его
+echo "BOT_TOKEN=your_actual_bot_token" > .env
+echo "CHAT_ID=-1001234567890" >> .env
+echo "DAILY_TIME=09:00" >> .env
+echo "MAX_PUSHUPS=100" >> .env
+
+# 6. Запустите бота
+python bot.py

@@ -1,0 +1,24 @@
+# Виртуальное окружение
+mybot_env/
+
+# Файлы данных
+bot_data.json
+
+# Токены и секреты
+.env
+*.env
+
+# Кэш Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Системные файлы
+.DS_Store
+Thumbs.db

@@ -33,4 +33,4 @@ echo "DAILY_TIME=09:00" >> .env
 echo "MAX_PUSHUPS=100" >> .env
 
 # 6. Запустите бота
-python bot.py
+python main.py

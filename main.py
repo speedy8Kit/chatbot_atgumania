@@ -14,7 +14,7 @@ CHAT_ID = os.getenv('CHAT_ID')
 DAILY_TIME = os.getenv('DAILY_TIME', '09:00')  # Значение по умолчанию
 MAX_PUSHUPS = int(os.getenv('MAX_PUSHUPS', '100'))  # Значение по умолчанию
 
-
+print(BOT_TOKEN)
 # Проверяем, что обязательные переменные установлены
 if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN не установлен. Проверьте файл .env")

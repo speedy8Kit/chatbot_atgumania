@@ -1,3 +1,4 @@
+import asyncio
 import os
 import datetime
 import schedule
@@ -11,26 +12,51 @@ load_dotenv()
 # Получаем значения из переменных окружения
 BOT_TOKEN = os.getenv('BOT_TOKEN')
 CHAT_ID = os.getenv('CHAT_ID')
-DAILY_TIME = os.getenv('DAILY_TIME', '09:00')
-MAX_PUSHUPS = int(os.getenv('MAX_PUSHUPS', '100')) 
 
 # Проверяем, что обязательные переменные установлены
 if not BOT_TOKEN:
     raise ValueError("❌ BOT_TOKEN не установлен. Проверьте файл .env")
-if not CHAT_ID:
-    raise ValueError("❌ CHAT_ID не установлен. Проверьте файл .env")
+if CHAT_ID:
+    try:
+        chat_id_int = int(CHAT_ID)
+        print(f"CHAT_ID как число: {chat_id_int}")
+        
+        # Определяем тип чата по ID
+        if str(chat_id_int).startswith('-100'):
+            print("📢 Тип чата: Супергруппа/Канал")
+        elif str(chat_id_int).startswith('-'):
+            print("👥 Тип чата: Группа")
+        else:
+            print("💬 Тип чата: Личные сообщения")
+            
+    except ValueError:
+        print(f"📛 CHAT_ID как username: {CHAT_ID}")
+else:
+    print("❌ CHAT_ID не установлен")
+
 
 # Преобразуем CHAT_ID в int (если это числовой ID) или оставляем как строку (если username)
 try:
     CHAT_ID = int(CHAT_ID)
 except ValueError:
-    pass  # Оставляем как строку (для username)
+    pass
 
-
-
-
-    
-if __name__ == "__main__":
-    message = f"Привет!"
+async def send_message_async():
+    """Асинхронная функция для отправки сообщения"""
     bot = Bot(token=BOT_TOKEN)
-    bot.send_message(chat_id=CHAT_ID, text=message)
+    await bot.send_message(chat_id=CHAT_ID, text="хавхаххахахах!")
+    print("✅ Сообщение отправлено!")
+
+def main():
+    """Основная функция"""
+    print("🤖 Telegram Bot - Отправка сообщений")
+    print("=" * 40)
+    print(f"💬 Chat ID: {CHAT_ID}")
+    print(f"🔐 Token: {'*' * len(BOT_TOKEN)}")
+    print("=" * 40)
+    
+    # Запускаем асинхронную функцию
+    asyncio.run(send_message_async())
+
+if __name__ == "__main__":
+    main()

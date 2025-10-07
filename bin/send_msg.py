@@ -41,11 +41,13 @@ try:
 except ValueError:
     pass
 
-async def send_message_async():
+async def send_message_async(text):
     """Асинхронная функция для отправки сообщения"""
     bot = Bot(token=BOT_TOKEN)
-    await bot.send_message(chat_id=CHAT_ID, text="хавхаххахахах!")
+    # await bot.send_message(chat_id=CHAT_ID, text="ТЫ ОТЖАЛСЯ СЕГОДНЯ?!?!")
+    await bot.send_message(chat_id=CHAT_ID, text=text)
     print("✅ Сообщение отправлено!")
+
 
 def main():
     """Основная функция"""
@@ -55,8 +57,9 @@ def main():
     print(f"🔐 Token: {'*' * len(BOT_TOKEN)}")
     print("=" * 40)
     
-    # Запускаем асинхронную функцию
-    asyncio.run(send_message_async())
+    asyncio.run(send_message_async("считаю до пяти"))
+    for i in range(1, 6):
+        asyncio.run(send_message_async(i))
 
 if __name__ == "__main__":
     main()
